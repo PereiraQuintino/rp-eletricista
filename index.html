@@ -1,468 +1,438 @@
 <!DOCTYPE html>
-<!-- saved from url=(0132)http://localhost:63342/Guia_Do_Eletricista/Calculadora_Do_Eletricista.html?_ijt=qvgrjgb2gamlpkt0sbjq1e6ugv&_ij_reload=RELOAD_ON_SAVE -->
-<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RP App — Guia do Eletricista</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body {
-            background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        /* TELA DE SENHA */
-        .caixa-senha {
-            max-width: 420px;
-            margin: 60px auto;
-            background: #1a1a2e;
-            padding: 45px 35px;
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(212,175,55,0.25);
-            text-align: center;
-            border: 1px solid rgba(212,175,55,0.3);
-        }
-        .logo-app {
-            font-size: 28px;
-            font-weight: bold;
-            color: #d4af37;
-            margin-bottom: 5px;
-            letter-spacing: 3px;
-        }
-        .subtitulo-app {
-            color: #ffd700;
-            font-size: 16px;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
-        }
-        .instrucao {
-            color: #aaa;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        .caixa-input {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .caixa-input input {
-            width: 100%;
-            padding: 16px 50px 16px 20px;
-            font-size: 18px;
-            border-radius: 12px;
-            border: 2px solid #333;
-            background: #0f0f1a;
-            color: white;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .caixa-input input:focus {
-            border-color: #d4af37;
-        }
-        .btn-olho {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            color: #888;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .btn-olho:hover { color: #d4af37; }
-        .btn-entrar {
-            width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 22px;
-            background: linear-gradient(90deg, #b8860b, #ffd700);
-            color: #1a1a1a;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: transform 0.2s;
-        }
-        .btn-entrar:hover { transform: scale(1.03); }
-        .erro {
-            color: #ff6b6b;
-            margin-top: 15px;
-            display: none;
-            font-size: 14px;
-        }
-        .marca-rodape {
-            margin-top: 30px;
-            color: #666;
-            font-size: 13px;
-        }
-        /* CONTEÚDO PRINCIPAL */
-        .container { max-width: 600px; margin: 0 auto; display: none; }
-        .aviso-atualizacao {
-            background: rgba(212,175,55,0.15);
-            border: 1px solid #d4af37;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #ffd700;
-            font-size: 14px;
-        }
-        h1 {
-            color: #d4af37;
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-        .botao {
-            width: 100%;
-            padding: 18px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .botao:hover { transform: scale(1.02); }
-        .vermelho { background: linear-gradient(90deg, #d32f2f, #ef5350); color: white; }
-        .dourado { background: linear-gradient(90deg, #b8860b, #ffd700); color: #1a1a1a; }
-        .verde { background: linear-gradient(90deg, #2e7d32, #66bb6a); color: white; }
-        .rodape {
-            text-align: center;
-            margin-top: 50px;
-            color: #d4af37;
-        }
-        .subtitulo { color: #888; font-size: 14px; margin-top: 5px; }
-        /* PÁGINAS INTERNAS */
-        .pagina { display: none; color: white; padding: 10px; }
-        .pagina h2 { color: #d4af37; margin-bottom: 20px; text-align: center; }
-        .pagina p, .pagina ul { margin: 10px 0; line-height: 1.7; }
-        .pagina ul { padding-left: 25px; }
-        .formula {
-            background: #1e1e2f;
-            padding: 18px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 3px solid #d4af37;
-            font-size: 17px;
-        }
-        .caixa-calc {
-            background: #1e1e2f;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .caixa-calc input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0 15px 0;
-            border-radius: 6px;
-            border: none;
-            font-size: 16px;
-            background: #2a2a3c;
-            color: white;
-        }
-        .btn-calcular {
-            padding: 12px 25px;
-            background: #d4af37;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .resultado {
-            margin-top: 15px;
-            padding: 15px;
-            background: #2a2a3c;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #66ff99;
-            font-size: 16px;
-        }
-        .voltar {
-            margin-top: 30px;
-            background: #444;
-            color: white;
-        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+        body{background:#0a0a12;color:white;min-height:100vh;padding:15px;}
+        /* Tela Login */
+        .login{max-width:400px;margin:40px auto;background:#1a1a2e;padding:30px;border-radius:15px;text-align:center;border:1px solid #d4af37;}
+        h1{color:#d4af37;font-size:22px;margin-bottom:5px;}
+        .sub{color:#ffd700;margin-bottom:25px;}
+        input{width:100%;padding:14px;font-size:16px;border-radius:8px;border:2px solid #333;background:#0f0f1a;color:white;margin-bottom:12px;}
+        button{width:100%;padding:14px;font-size:17px;font-weight:bold;border:none;border-radius:8px;cursor:pointer;margin:5px 0;transition:transform 0.15s;}
+        button:active{transform:scale(0.98);}
+        .btn-entrar{background:linear-gradient(90deg,#b8860b,#ffd700);color:#1a1a1a;}
+        .olho{width:auto;padding:10px;margin-left:-40px;background:transparent;color:#ffd700;}
+        .erro{color:#ff6b6b;margin-top:10px;display:none;}
+        /* Menu */
+        .menu{max-width:520px;margin:0 auto;display:none;}
+        .titulo{text-align:center;margin:20px 0;}
+        .botao{background:#222;text-align:left;padding:15px 20px;font-size:16px;color:white;border-left:5px solid;}
+        .b-vermelho{border-left-color:#ef5350;background:linear-gradient(90deg,#331a1a,#221111);}
+        .b-dourado{border-left-color:#ffd700;background:linear-gradient(90deg,#332f1a,#221f11);}
+        .b-azul{border-left-color:#4dabf7;background:linear-gradient(90deg,#1a2433,#111822);}
+        .b-azul-escuro{border-left-color:#228be6;background:linear-gradient(90deg,#152238,#0f1a2b);}
+        .b-verde{border-left-color:#66bb6a;background:linear-gradient(90deg,#1a3324,#112218);}
+        /* Páginas */
+        .pagina{max-width:520px;margin:0 auto;display:none;}
+        h2{color:#d4af37;margin:20px 0 15px;text-align:center;}
+        p{margin:10px 0;line-height:1.7;}
+        .formula{background:#1e1e2f;padding:15px;border-left:3px solid #ffd700;font-size:15px;color:#ffd700;margin:15px 0;line-height:1.8;border-radius:0 8px 8px 0;}
+        .calc{background:#1e1e2f;padding:22px;border-radius:10px;margin:20px 0;}
+        label{display:block;margin:12px 0 5px;color:#ffd700;font-weight:bold;}
+        .btn-calcular{background:linear-gradient(90deg,#b8860b,#ffd700);color:#1a1a1a;margin-top:15px;}
+        .resultado{margin-top:20px;padding:18px;background:#1a2a2a;border-radius:8px;font-size:15px;line-height:2.0;display:none;}
+        .bloco{border-bottom:1px solid #333;padding:12px 0;}
+        .bloco:last-child{border:none;}
+        .destaque{color:#ffd700;font-weight:bold;}
+        .valor{color:#66ff99;font-weight:bold;}
+        .observacao{color:#888;font-size:13px;margin-top:8px;}
+        .voltar{background:#444;color:white;margin-top:20px;}
+        /* Simulador Estrela-Triângulo */
+        .simulador{background:#1e1e2f;padding:20px;border-radius:10px;margin:20px 0;}
+        .sim-botoes{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap;}
+        .sim-btn{flex:1;padding:12px;font-size:14px;border-radius:8px;min-width:120px;}
+        .btn-estrela{background:#4dabf7;color:#000;}
+        .btn-delta{background:#ef5350;color:white;}
+        .btn-imao{background:#228be6;color:white;}
+        .btn-bobina{background:#66bb6a;color:#000;}
+        .sim-tela{background:#0f0f1a;padding:25px;border-radius:8px;margin-top:15px;min-height:200px;display:flex;align-items:center;justify-content:center;}
+        .desenho{font-size:50px;line-height:1.5;text-align:center;}
+        .info-ligacao{margin-top:15px;padding:15px;border-radius:8px;line-height:1.8;}
+        .info-estrela{background:#1a2433;border:1px solid #4dabf7;}
+        .info-delta{background:#331a1a;border:1px solid #ef5350;}
+        .info-sincro{background:#152238;border:1px solid #228be6;}
+        .info-bobina{background:#1a3324;border:1px solid #66bb6a;}
+        /* Passo a passo */
+        .passo{background:#1e1e2f;padding:15px;border-radius:8px;margin:10px 0;border-left:3px solid #ffd700;}
+        .passo-num{display:inline-block;width:28px;height:28px;background:#ffd700;color:#000;font-weight:bold;border-radius:50%;text-align:center;line-height:28px;margin-right:10px;}
     </style>
 </head>
 <body>
-<!-- 🔐 TELA DE ENTRADA COM OLHINHO -->
-<div class="caixa-senha" id="telaSenha">
-    <div class="logo-app">⚡ RP App ⚡</div>
-    <div class="subtitulo-app">GUIA DO ELETRICISTA</div>
-
-    <p class="instrucao">Digite sua senha de acesso abaixo</p>
-
-    <div class="caixa-input">
-        <input type="password" id="senhaDigitada" placeholder="Digite sua senha">
-        <button type="button" class="btn-olho" id="btnOlho" onclick="alternarSenha()">👁️</button>
-    </div>
-
-    <button class="btn-entrar" onclick="verificarSenha()">ENTRAR</button>
-
-    <div class="erro" id="msgErro">Senha incorreta — verifique e tente novamente</div>
-
-    <div class="marca-rodape">© 2026 — RP App — Todos os direitos reservados</div>
+<!-- TELA DE LOGIN -->
+<div class="login" id="login">
+    <h1>⚡ RP App ⚡</h1>
+    <p class="sub">GUIA DO ELETRICISTA</p>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button class="olho" onclick="mostrarSenha()">👁️</button>
+    <button class="btn-entrar" onclick="entrar()">ENTRAR</button>
+    <p class="erro" id="erro">Senha incorreta</p>
 </div>
-<!-- ✅ CONTEÚDO PRINCIPAL -->
-<div class="container" id="conteudo">
-    <div class="aviso-atualizacao">
-        ✅ Atualização: Outubro/2026 — Lâmpadas, Refletores + Cálculos adicionados!
+<!-- MENU PRINCIPAL -->
+<div class="menu" id="menu">
+    <div class="titulo">
+        <h1>⚡ GUIA DO ELETRICISTA ⚡</h1>
     </div>
-    <h1>⚡ GUIA DO ELETRICISTA ⚡</h1>
-    <button class="botao vermelho" onclick="abrir('resistencia')">RESISTÊNCIA</button>
-    <button class="botao dourado" onclick="abrir('tensao')">TENSÃO</button>
-    <button class="botao vermelho" onclick="abrir('corrente')">CORRENTE / AMPERAGEM</button>
-    <button class="botao dourado" onclick="abrir('potencia')">POTÊNCIA</button>
-    <button class="botao verde" onclick="abrir('motor')">MOTOR / POLOS / TORQUE</button>
-    <button class="botao verde" onclick="abrir('fio')">FIO / SEGURANÇA</button>
-    <button class="botao verde" onclick="abrir('iluminacao')">💡 LÂMPADAS / REFLETORES</button>
-    <div class="rodape">
-        <h3>RP App</h3>
-        <p class="subtitulo">Guia do Eletricista © 2026</p>
+
+    <button class="botao b-vermelho" onclick="ir('resistencia')">🔌 RESISTÊNCIA</button>
+    <button class="botao b-dourado" onclick="ir('tensao')">⚡ TENSÃO</button>
+    <button class="botao b-vermelho" onclick="ir('corrente')">⚡ CORRENTE</button>
+    <button class="botao b-dourado" onclick="ir('potencia')">⚡ POTÊNCIA</button>
+    <button class="botao b-azul" onclick="ir('motor')">🔧 MOTOR — CV / RPM / TORQUE</button>
+    <button class="botao b-azul-escuro" onclick="ir('sincronizar')">🧲 SINCRONIZAR MOTOR</button>
+    <button class="botao b-azul" onclick="ir('ligacao')">🔌 ESTRELA / TRIÂNGULO</button>
+    <button class="botao b-verde" onclick="ir('fio')">🔌 FIO / BITOLA / SEGURANÇA</button>
+    <button class="botao b-verde" onclick="ir('iluminacao')">💡 LÂMPADAS / REFLETORES</button>
+</div>
+<!-- PÁGINA: RESISTÊNCIA -->
+<div class="pagina" id="resistencia">
+    <h2>🔌 RESISTÊNCIA</h2>
+    <p><span class="destaque">O que é:</span> Oposição à passagem da corrente elétrica.</p>
+    <p><span class="destaque">Unidade:</span> Ohm — símbolo: Ω</p>
+    <div class="formula">Fórmula: R = V ÷ I</div>
+    <div class="calc">
+        <label>Tensão (V):</label>
+        <input type="number" id="r_v" placeholder="Ex: 220">
+        <label>Corrente (A):</label>
+        <input type="number" id="r_i" placeholder="Ex: 2">
+        <button class="btn-calcular" onclick="calcR()">CALCULAR</button>
+        <div class="resultado" id="r_res"></div>
     </div>
-    <!-- PÁGINAS INTERNAS (resistência, tensão, etc — mantém tudo igual) -->
-    <div class="pagina" id="resistencia">
-        <h2>🔌 RESISTÊNCIA</h2>
-        <p><strong>O que é:</strong> É a oposição que o material faz à passagem da corrente elétrica.</p>
-        <p><strong>Unidade:</strong> Ohm (Ω)</p>
-        <div class="formula">
-            R = V ÷ I &nbsp;|&nbsp; Resistência = Tensão ÷ Corrente<br>
-            V = R × I &nbsp;|&nbsp; Tensão = Resistência × Corrente<br>
-            I = V ÷ R &nbsp;|&nbsp; Corrente = Tensão ÷ Resistência
-        </div>
-        <div class="caixa-calc">
-            Tensão (V):<br>
-            <input type="number" id="r_v" placeholder="Ex: 220">
-            Corrente (A):<br>
-            <input type="number" id="r_i" placeholder="Ex: 2">
-            <button class="btn-calcular" onclick="calcResistencia()">Calcular</button>
-            <div class="resultado" id="r_res"></div>
-        </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: TENSÃO -->
+<div class="pagina" id="tensao">
+    <h2>⚡ TENSÃO</h2>
+    <p><span class="destaque">O que é:</span> Força que empurra os elétrons pelo fio.</p>
+    <p><span class="destaque">Unidade:</span> Volt — símbolo: V</p>
+    <div class="formula">Fórmula: V = R × I</div>
+    <div class="calc">
+        <label>Resistência (Ω):</label>
+        <input type="number" id="t_r" placeholder="Ex: 110">
+        <label>Corrente (A):</label>
+        <input type="number" id="t_i" placeholder="Ex: 2">
+        <button class="btn-calcular" onclick="calcT()">CALCULAR</button>
+        <div class="resultado" id="t_res"></div>
     </div>
-    <div class="pagina" id="tensao">
-        <h2>⚡ TENSÃO</h2>
-        <p><strong>O que é:</strong> É a "força" que impulsiona a eletricidade pelo fio.</p>
-        <p><strong>Unidade:</strong> Volt (V)</p>
-        <p>Valores comuns: 12V | 24V | 127V | 220V | 380V</p>
-        <div class="formula">V = R × I</div>
-        <div class="caixa-calc">
-            Resistência (Ω):<br>
-            <input type="number" id="t_r" placeholder="Ex: 110">
-            Corrente (A):<br>
-            <input type="number" id="t_i" placeholder="Ex: 2">
-            <button class="btn-calcular" onclick="calcTensao()">Calcular</button>
-            <div class="resultado" id="t_res"></div>
-        </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: CORRENTE -->
+<div class="pagina" id="corrente">
+    <h2>⚡ CORRENTE</h2>
+    <p><span class="destaque">O que é:</span> Fluxo de elétrons passando pelo circuito.</p>
+    <p><span class="destaque">Unidade:</span> Ampère — símbolo: A</p>
+    <div class="formula">Fórmula: I = V ÷ R &nbsp;|&nbsp; I = P ÷ V</div>
+    <div class="calc">
+        <label>Tensão (V):</label>
+        <input type="number" id="c_v" placeholder="Ex: 220">
+        <label>Resistência (Ω):</label>
+        <input type="number" id="c_r" placeholder="Ex: 110">
+        <button class="btn-calcular" onclick="calcC()">CALCULAR</button>
+        <div class="resultado" id="c_res"></div>
     </div>
-    <div class="pagina" id="corrente">
-        <h2>⚡ CORRENTE / AMPERAGEM</h2>
-        <p><strong>O que é:</strong> É o fluxo de elétrons passando pelo fio.</p>
-        <p><strong>Unidade:</strong> Ampère (A)</p>
-        <div class="formula">I = V ÷ R &nbsp;|&nbsp; I = P ÷ V</div>
-        <div class="caixa-calc">
-            Potência (W):<br>
-            <input type="number" id="c_p" placeholder="Ex: 2200">
-            Tensão (V):<br>
-            <input type="number" id="c_v" placeholder="Ex: 220">
-            <button class="btn-calcular" onclick="calcCorrente()">Calcular</button>
-            <div class="resultado" id="c_res"></div>
-        </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: POTÊNCIA -->
+<div class="pagina" id="potencia">
+    <h2>⚡ POTÊNCIA</h2>
+    <p><span class="destaque">O que é:</span> Energia consumida ou produzida pelo equipamento.</p>
+    <p><span class="destaque">Unidade:</span> Watt — símbolo: W &nbsp;|&nbsp; 1 CV = 736 W</p>
+    <div class="formula">Fórmula: P = V × I</div>
+    <div class="calc">
+        <label>Tensão (V):</label>
+        <input type="number" id="p_v" placeholder="Ex: 220">
+        <label>Corrente (A):</label>
+        <input type="number" id="p_i" placeholder="Ex: 5">
+        <button class="btn-calcular" onclick="calcP()">CALCULAR</button>
+        <div class="resultado" id="p_res"></div>
     </div>
-    <div class="pagina" id="potencia">
-        <h2>⚡ POTÊNCIA</h2>
-        <p><strong>O que é:</strong> Energia consumida ou produzida.</p>
-        <p><strong>Unidade:</strong> Watt (W)</p>
-        <div class="formula">P = V × I</div>
-        <div class="caixa-calc">
-            Tensão (V):<br>
-            <input type="number" id="p_v" placeholder="Ex: 220">
-            Corrente (A):<br>
-            <input type="number" id="p_i" placeholder="Ex: 5">
-            <button class="btn-calcular" onclick="calcPotencia()">Calcular</button>
-            <div class="resultado" id="p_res"></div>
-        </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: MOTOR -->
+<div class="pagina" id="motor">
+    <h2>🔧 MOTOR — CV / CORRENTE / TORQUE / RPM</h2>
+    <div class="calc">
+        <label>Potência do Motor (CV):</label>
+        <input type="number" id="m_cv" placeholder="Ex: 10" step="0.1">
+        <label>Tensão de Alimentação (V):</label>
+        <input type="number" id="m_v" placeholder="Ex: 380" value="380">
+        <label>Fator de Potência (cos φ):</label>
+        <input type="number" id="m_fp" placeholder="Ex: 0.85" value="0.85" step="0.01">
+        <button class="btn-calcular" onclick="calcMotor()">📊 CALCULAR DADOS DO MOTOR</button>
+        <div class="resultado" id="m_res"></div>
     </div>
-    <div class="pagina" id="motor">
-        <h2>🔧 MOTOR / POLOS / TORQUE</h2>
-        <div class="formula">
-            2 polos → ~3.600 RPM<br>
-            4 polos → ~1.800 RPM<br>
-            6 polos → ~1.200 RPM<br>
-            8 polos → &nbsp;&nbsp;~900 RPM<br>
-            <em>Mais polos = menos rotação = mais força</em>
+    <p class="observacao">* Valores aproximados, referência para dimensionamento.</p>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- ✅ PÁGINA NOVA: SINCRONIZAR MOTOR -->
+<div class="pagina" id="sincronizar">
+    <h2>🧲 SINCRONIZAR MOTOR — POLOS E LIGAÇÃO</h2>
+
+    <p>Quando o motor <span class="destaque">não tem numeração nos terminais</span>, use esses métodos para achar os polos e ligar certo!</p>
+
+    <div class="simulador">
+        <div class="sim-botoes">
+            <button class="sim-btn btn-imao" onclick="mostrarImao()">🧲 MÉTODO DO ÍMÃ</button>
+            <button class="sim-btn btn-bobina" onclick="mostrarBobina()">⚡ MÉTODO DA BOBINA</button>
         </div>
-        <div class="caixa-calc">
-            Potência (CV):<br>
-            <input type="number" id="m_cv" placeholder="Ex: 10">
-            Tensão (V):<br>
-            <input type="number" id="m_v" placeholder="Ex: 380">
-            <button class="btn-calcular" onclick="calcMotor()">Calcular</button>
-            <div class="resultado" id="m_res"></div>
+
+        <div class="sim-tela" id="telaSincro">
+            <div class="desenho" id="desenhoSincro">
+                Escolha um método ⬆️
+            </div>
         </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+
+        <div class="info-ligacao" id="infoSincro" style="display:none;"></div>
     </div>
-    <div class="pagina" id="fio">
-        <h2>🔌 FIO / SEGURANÇA</h2>
-        <div class="formula">
-            1,5 mm² → até 15A<br>
-            2,5 mm² → até 25A<br>
-            4,0 mm² → até 35A<br>
-            6,0 mm² → até 45A<br>
-            10,0 mm² → até 65A
-        </div>
-        <p>NR-10: Desligar, testar, isolar, sinalizar!</p>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+    <h3 style="color:#ffd700;margin:25px 0 10px;">📋 PASSO A PASSO COMPLETO</h3>
+
+    <div class="passo">
+        <span class="passo-num">1</span>
+        <b>Separe os enrolamentos</b> — Meça com multímetro: cada par com continuidade é uma bobina. Marque: Bobina 1, Bobina 2, Bobina 3.
     </div>
-    <div class="pagina" id="iluminacao">
-        <h2>💡 LÂMPADAS / REFLETORES</h2>
-        <p><strong>LED:</strong> Mais econômico e duradouro ✅</p>
-        <p><strong>Refletor:</strong> Confirme tensão e proteção IP (IP65 para externo ☔)</p>
-        <div class="formula">
-            Corrente = Potência ÷ Tensão<br>
-            Ex: 100W ÷ 220V = 0,45A por refletor
-        </div>
-        <div class="caixa-calc">
-            Potência por refletor (W):<br>
-            <input type="number" id="il_pot" placeholder="Ex: 100">
-            Tensão (V):<br>
-            <input type="number" id="il_ten" placeholder="Ex: 220">
-            Capacidade do fio (A):<br>
-            <input type="number" id="il_amp" placeholder="Ex: 20">
-            <button class="btn-calcular" onclick="calcIluminacao()">Calcular</button>
-            <div class="resultado" id="il_res"></div>
-        </div>
-        <button class="botao voltar" onclick="voltar()">← Voltar</button>
+
+    <div class="passo">
+        <span class="passo-num">2</span>
+        <b>Identifique os polos com ímã</b> — Gire o eixo devagar com um ímã perto. O sentido que o eixo segue = Norte. Marque os terminais correspondentes.
     </div>
+
+    <div class="passo">
+        <span class="passo-num">3</span>
+        <b>Confirme com tensão induzida</b> — Conecte uma lâmpada pequena em uma bobina e gire o eixo. Se acender igual nas 3 → alinhou certo!
+    </div>
+
+    <div class="passo">
+        <span class="passo-num">4</span>
+        <b>Ligação ESTRELA</b> → Junta 1 de cada bobina no centro → alimenta nos outros 3 → Tensão menor (partida).
+    </div>
+
+    <div class="passo">
+        <span class="passo-num">5</span>
+        <b>Ligação TRIÂNGULO</b> → Liga saída de um na entrada do outro → forma triângulo → Tensão total (funcionamento).
+    </div>
+
+    <div class="formula">
+        ⚡ <b>Resumo prático:</b><br>
+        • Norte + Norte = REPEL → NÃO junta!<br>
+        • Norte + Sul = ATRAÍ → JUNTA!<br>
+        • Sempre juntar <b>Norte com Sul</b> entre as bobinas ✅
+    </div>
+
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: LIGAÇÃO ESTRELA-TRIÂNGULO -->
+<div class="pagina" id="ligacao">
+    <h2>🔌 LIGAÇÃO — ESTRELA / TRIÂNGULO</h2>
+
+    <p>Clique em cada tipo para ver como ligar:</p>
+
+    <div class="simulador">
+        <div class="sim-botoes">
+            <button class="sim-btn btn-estrela" onclick="mostrarEstrela()">⭐ ESTRELA</button>
+            <button class="sim-btn btn-delta" onclick="mostrarDelta()">△ TRIÂNGULO</button>
+        </div>
+
+        <div class="sim-tela" id="telaLig">
+            <div class="desenho" id="desenhoLig">
+                Escolha tipo de ligação ⬆️
+            </div>
+        </div>
+
+        <div class="info-ligacao" id="infoLig" style="display:none;"></div>
+    </div>
+
+    <div class="formula">
+        ⭐ <b>Estrela (Y)</b> → Tensão reduzida → Partida suave<br>
+        △ <b>Triângulo (Δ)</b> → Tensão nominal → Potência total<br>
+        ✅ Motor 380V: Estrela na partida → comuta para Triângulo!
+    </div>
+
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: FIO / BITOLA -->
+<div class="pagina" id="fio">
+    <h2>🔌 BITOLA DE FIO / SEGURANÇA</h2>
+    <div class="formula">
+        <b>1,5 mm²</b> → até 15 A → Iluminação<br>
+        <b>2,5 mm²</b> → até 25 A → Tomadas gerais<br>
+        <b>4,0 mm²</b> → até 35 A → Chuveiro / Ar-condicionado<br>
+        <b>6,0 mm²</b> → até 45 A → Equipamentos potentes<br>
+        <b>10,0 mm²</b> → até 65 A → Entrada principal<br>
+        <b>16,0 mm²</b> → até 90 A → Quadro de distribuição<br>
+        <b>25,0 mm²</b> → até 120 A → Rede comercial
+    </div>
+    <p><span class="destaque">NR-10:</span> Desligar → Bloquear → Testar → Isolar → Sinalizar!</p>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
+</div>
+<!-- PÁGINA: ILUMINAÇÃO -->
+<div class="pagina" id="iluminacao">
+    <h2>💡 LÂMPADAS / REFLETORES</h2>
+    <div class="formula">
+        100W comum = 18W LED<br>
+        60W comum = 10W LED<br>
+        40W comum = 6W LED
+    </div>
+    <p><span class="destaque">Regra de ouro:</span> Confirme SEMPRE: Tensão da lâmpada = Tensão da rede!</p>
+    <p><span class="destaque">Refletor:</span> Prefira modelo IP65 para área externa — protege contra chuva e poeira.</p>
+    <button class="voltar" onclick="voltar()">← VOLTAR</button>
 </div>
 <script>
-    // 🔐 SENHAS
-    const SENHAS_AUTORIZADAS = [
-        "rp2026",
-        "eletric123",
-        "luz2026",
-        "refletor45",
-    ];
-    // 👁️ MOSTRAR/ESCONDER SENHA
-    function alternarSenha() {
-        const input = document.getElementById('senhaDigitada');
-        const btn = document.getElementById('btnOlho');
-        if (input.type === 'password') {
-            input.type = 'text';
-            btn.textContent = '🙈';
-        } else {
-            input.type = 'password';
-            btn.textContent = '👁️';
-        }
+    const senhasCertas = ["rp2026"];
+    function mostrarSenha(){
+      const i = document.getElementById('senha');
+      i.type = i.type === 'password' ? 'text' : 'password';
     }
-    function verificarSenha() {
-        const digitada = document.getElementById('senhaDigitada').value.trim();
-        if (SENHAS_AUTORIZADAS.includes(digitada)) {
-            document.getElementById('telaSenha').style.display = 'none';
-            document.getElementById('conteudo').style.display = 'block';
-        } else {
-            document.getElementById('msgErro').style.display = 'block';
-        }
+    function entrar(){
+      const s = document.getElementById('senha').value.trim();
+      if(senhasCertas.includes(s)){
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('menu').style.display = 'block';
+      }else{
+        document.getElementById('erro').style.display = 'block';
+      }
     }
-    function abrir(id) {
-        document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-        document.querySelector('.container').style.display = 'none';
-        document.getElementById(id).style.display = 'block';
+    function ir(id){
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
     }
-    function voltar() {
-        document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-        document.querySelector('.container').style.display = 'block';
+    function voltar(){
+      document.querySelectorAll('.pagina').forEach(p=>p.style.display='none');
+      document.querySelectorAll('.resultado').forEach(r=>r.style.display='none');
+      document.querySelectorAll('.info-ligacao').forEach(i=>i.style.display='none');
+      document.getElementById('menu').style.display = 'block';
     }
-    // CALCULADORAS
-    function calcResistencia() {
-        const v = parseFloat(document.getElementById('r_v').value);
-        const i = parseFloat(document.getElementById('r_i').value);
-        if (v && i) document.getElementById('r_res').innerHTML = Resistência = ${(v/i).toFixed(2)} Ω;
+    // CÁLCULOS
+    function calcR(){
+      const v = parseFloat(document.getElementById('r_v').value);
+      const i = parseFloat(document.getElementById('r_i').value);
+      if(v && i){
+        document.getElementById('r_res').innerHTML = 'Resistência = <span class="valor">' + (v/i).toFixed(2) + ' Ω</span>';
+        document.getElementById('r_res').style.display = 'block';
+      }
     }
-    function calcTensao() {
-        const r = parseFloat(document.getElementById('t_r').value);
-        const i = parseFloat(document.getElementById('t_i').value);
-        if (r && i) document.getElementById('t_res').innerHTML = Tensão = ${(r*i).toFixed(2)} V;
+    function calcT(){
+      const r = parseFloat(document.getElementById('t_r').value);
+      const i = parseFloat(document.getElementById('t_i').value);
+      if(r && i){
+        document.getElementById('t_res').innerHTML = 'Tensão = <span class="valor">' + (r*i).toFixed(2) + ' V</span>';
+        document.getElementById('t_res').style.display = 'block';
+      }
     }
-    function calcCorrente() {
-        const p = parseFloat(document.getElementById('c_p').value);
-        const v = parseFloat(document.getElementById('c_v').value);
-        if (p && v) document.getElementById('c_res').innerHTML = Corrente = ${(p/v).toFixed(2)} A;
+    function calcC(){
+      const v = parseFloat(document.getElementById('c_v').value);
+      const r = parseFloat(document.getElementById('c_r').value);
+      if(v && r){
+        document.getElementById('c_res').innerHTML = 'Corrente = <span class="valor">' + (v/r).toFixed(2) + ' A</span>';
+        document.getElementById('c_res').style.display = 'block';
+      }
     }
-    function calcPotencia() {
-        const v = parseFloat(document.getElementById('p_v').value);
-        const i = parseFloat(document.getElementById('p_i').value);
-        if (v && i) document.getElementById('p_res').innerHTML = Potência = ${(v*i).toFixed(2)} W;
+    function calcP(){
+      const v = parseFloat(document.getElementById('p_v').value);
+      const i = parseFloat(document.getElementById('p_i').value);
+      if(v && i){
+        document.getElementById('p_res').innerHTML = 'Potência = <span class="valor">' + (v*i).toFixed(2) + ' W</span>';
+        document.getElementById('p_res').style.display = 'block';
+      }
     }
-    function calcMotor() {
-        const cv = parseFloat(document.getElementById('m_cv').value);
-        const v = parseFloat(document.getElementById('m_v').value);
-        if (cv && v) {
-            const corr = (cv * 2) / (v / 380);
-            document.getElementById('m_res').innerHTML =
-                Corrente: ${corr.toFixed(2)} A<br>Partida: ${(corr*5).toFixed(2)} a ${(corr*7).toFixed(2)} A;
-        }
+    function calcMotor(){
+      const cv = parseFloat(document.getElementById('m_cv').value);
+      const V = parseFloat(document.getElementById('m_v').value);
+      const fp = parseFloat(document.getElementById('m_fp').value || 0.85);
+      if(!cv || !V){alert('Preencha CV e Tensão!');return;}
+
+      const W = cv * 736;
+      const rend = 0.88;
+      const I_nom = W / (Math.sqrt(3) * V * fp * rend);
+      const I_vazio = I_nom * 0.35;
+      const constante = 9550;
+
+      const polos = [
+        {qtd:2, rpm:3500}, {qtd:4, rpm:1750}, {qtd:6, rpm:1160}, {qtd:8, rpm:870}
+      ];
+
+      let html = '';
+      polos.forEach(p => {
+        const torque = (W/1000) * constante / p.rpm;
+        html += '<div class="bloco">';
+        html += '<span class="destaque">' + p.qtd + ' Polos</span> → ' + p.rpm + ' RPM<br>';
+        html += '  💪 Torque: <span class="valor">' + torque.toFixed(1) + ' N·m</span><br>';
+        html += '  ⚡ Corrente Nominal: <span class="valor">' + I_nom.toFixed(2) + ' A</span><br>';
+        html += '  ⚡ Sem Carga: <span class="valor">' + I_vazio.toFixed(2) + ' A</span>';
+        html += '</div>';
+      });
+      html += '<p class="observacao">CV: ' + cv + ' | Tensão: ' + V + 'V | FP: ' + fp + '</p>';
+
+      document.getElementById('m_res').innerHTML = html;
+      document.getElementById('m_res').style.display = 'block';
     }
-    function calcIluminacao() {
-        const p = parseFloat(document.getElementById('il_pot').value);
-        const v = parseFloat(document.getElementById('il_ten').value);
-        const a = parseFloat(document.getElementById('il_amp').value);
-        if (p && v && a) {
-            const porRef = p / v;
-            const qtd = Math.floor(a / porRef);
-            document.getElementById('il_res').innerHTML =
-                Por refletor: ${porRef.toFixed(2)} A<br>Cabo suporta: ${qtd} refletores;
-        }
+    // SIMULADOR SINCRONIZAÇÃO
+    function mostrarImao(){
+      document.getElementById('desenhoSincro').innerHTML = '🧲<br>N ←→ S<br>ÍMÃO';
+      const info = document.getElementById('infoSincro');
+      info.className = 'info-ligacao info-sincro';
+      info.innerHTML = `
+    <span class="destaque">MÉTODO DO ÍMÃ — Passo a Passo</span><br><br>
+    1️⃣ Pegue um ímã forte e aproxime do eixo do motor<br>
+    2️⃣ Gire o eixo devagar com a mão<br>
+    3️⃣ O eixo vai "puxar" e alinhar com o ímã = ali está o <b>Polo Norte</b><br>
+    4️⃣ Marque os terminais dessa bobina<br>
+    5️⃣ Repita nas outras bobinas<br>
+    6️⃣ <b>Junte Norte com Sul</b> entre as bobinas ✅<br>
+    ❌ NÃO junte Norte com Norte — repelirá!
+      `;
+      info.style.display = 'block';
     }
-    // Enter = entrar
-    document.getElementById('senhaDigitada').addEventListener('keypress', e => {
-        if (e.key === 'Enter') verificarSenha();
-    });
+    function mostrarBobina(){
+      document.getElementById('desenhoSincro').innerHTML = '⚡<br>Bobina<br>Indução';
+      const info = document.getElementById('infoSincro');
+      info.className = 'info-ligacao info-bobina';
+      info.innerHTML = `
+    <span class="destaque">MÉTODO DA BOBINA — Tensão Induzida</span><br><br>
+    1️⃣ Conecte uma lâmpada de 12V ou multímetro em uma bobina<br>
+    2️⃣ Gire o eixo com velocidade constante<br>
+    3️⃣ Se a lâmpada acender = tensão induzida = alinhou certo!<br>
+    4️⃣ Faça o mesmo nas outras bobinas<br>
+    5️⃣ Se as 3 acenderem com brilho parecido → <b>sincronizado</b> ✅<br>
+    6️⃣ Se uma acender fraco → troca os terminais dessa bobina<br><br>
+    💡 <b>Regra de ouro:</b> Quando alinhadas, as fases ficam equilibradas!
+      `;
+      info.style.display = 'block';
+    }
+    // SIMULADOR ESTRELA-TRIÂNGULO
+    function mostrarEstrela(){
+      document.getElementById('desenhoLig').innerHTML = '⭐<br>Y<br>ESTRELA';
+      const info = document.getElementById('infoLig');
+      info.className = 'info-ligacao info-estrela';
+      info.innerHTML = `
+    <span class="destaque">Ligação em ESTRELA (Y)</span><br><br>
+    🔌 Três terminais ligados juntos no centro<br>
+    ⚡ Tensão aplicada: <b>MENOR</b> (ex: 220V em motor 380V)<br>
+    ⚡ Corrente de partida: <b>BAIXA</b> — protege a rede<br>
+    ✅ Usado para: <b>Dar partida no motor</b><br>
+    ⚠️ Potência: ~1/3 da potência total
+      `;
+      info.style.display = 'block';
+    }
+    function mostrarDelta(){
+      document.getElementById('desenhoLig').innerHTML = '△<br>Δ<br>TRIÂNGULO';
+      const info = document.getElementById('infoLig');
+      info.className = 'info-ligacao info-delta';
+      info.innerHTML = `
+    <span class="destaque">Ligação em TRIÂNGULO (Δ)</span><br><br>
+    🔌 Saída de uma bobina = entrada da próxima<br>
+    ⚡ Tensão aplicada: <b>COMPLETA</b> (ex: 380V)<br>
+    ⚡ Corrente: <b>NOMINAL</b> — plena carga<br>
+    ✅ Usado para: <b>Funcionamento normal</b> do motor<br>
+    ✅ Potência: Potência nominal completa
+      `;
+      info.style.display = 'block';
+    }
+    document.getElementById('senha').addEventListener('keypress',e=>{if(e.key==='Enter')entrar();});
 </script>
+</body>
+</html>
 
-<script>
-(function() {
-  var ws = new WebSocket('ws://' + window.location.host + 
-             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
-             'referrer=' + encodeURIComponent(window.location.pathname));
-  ws.onmessage = function (msg) {
-      if (msg.data === 'reload') {
-          window.location.reload();
-      }
-      if (msg.data.startsWith('update-css ')) {
-          var messageId = msg.data.substring(11);
-          var links = document.getElementsByTagName('link');
-          for (var i = 0; i < links.length; i++) {
-              var link = links[i];
-              if (link.rel !== 'stylesheet') continue;
-              var clonedLink = link.cloneNode(true);
-              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
-              if (newHref !== link.href) {
-                clonedLink.href = newHref;
-              }
-              else {
-                var indexOfQuest = newHref.indexOf('?');
-                if (indexOfQuest >= 0) {
-                  // to support ?foo#hash 
-                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
-                                    newHref.substring(indexOfQuest + 1);
-                }
-                else {
-                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
-                }
-              }
-              link.replaceWith(clonedLink);
-          }
-      }
-  };
-})();
-</script></body></html>
+
